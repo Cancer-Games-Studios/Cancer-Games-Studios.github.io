@@ -10,16 +10,23 @@
     <div class="container">
         <h1>Time until im 18</h1>
         <div class="timer" id="time"></div>
-        <div class="age-section">
-            <h2>Current Age</h2>
-            <div class="age" id="age"></div>
-        </div>
         <div class="progress-section">
             <h2>Progress</h2>
             <div class="percentage" id="percentage"></div>
         </div>
+        <div class="age-section">
+            <h2>Current Age</h2>
+            <div class="age" id="age"></div>
+        </div>
     </div>
     <script>
+        // Initialize all counters immediately
+        function initializeCounters() {
+            updateTime();
+            updateAge();
+            updateProgress();
+        }
+
         function calculateAge(birthDate) {
             const now = new Date();
             let years = now.getFullYear() - birthDate.getFullYear();
@@ -67,15 +74,16 @@
             
             const roundedPercentage = Math.min(Math.max(percentage, 0), 100).toFixed(2);
             document.getElementById('percentage').innerHTML = `${roundedPercentage}%`;
-            document.getElementById('progress-fill').style.width = `${roundedPercentage}%`;
         }
 
-        updateTime();
-        updateAge();
-        updateProgress();
-        setInterval(updateTime, 1000);
-        setInterval(updateAge, 1000);
-        setInterval(updateProgress, 1000);
+        // Start the counters when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCounters();
+            // Update all counters every second
+            setInterval(updateTime, 1000);
+            setInterval(updateAge, 1000);
+            setInterval(updateProgress, 1000);
+        });
     </script>
     <style>
         * {
@@ -123,20 +131,6 @@
         }
         .progress-section {
             margin-top: 1vh;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 1vh 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #8BC34A);
-            width: 0%;
-            transition: width 0.5s ease-in-out;
         }
         .age-section {
             margin-top: 1vh;
