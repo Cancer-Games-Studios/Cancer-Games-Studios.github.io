@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Time until im 18</h1>
+    <p id="time"></p>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const target = new Date('2026-05-29');
+            const difference = target - now;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            document.getElementById('time').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;   
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 500px;
+        }
+        h1 {
+            font-size: 40px;
+            text-align: center;
+        }
+        p {
+            font-size: 20px;
+            text-align: center;   
+        }
+    </style>
+</body>
+</html>
